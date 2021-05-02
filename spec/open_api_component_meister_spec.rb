@@ -29,5 +29,13 @@ RSpec.describe OpenApiComponentMeister do
         end
       end
     end
+
+    describe "model_name" do
+      context do
+        it "valid name" do
+          expect(target.model_name).to eq "User"
+        end
+      end
+    end
   end
 end

@@ -1,8 +1,6 @@
 # OpenApiComponentMeister
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/open_api_component_meister`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Generate and check Open API Component from your ActiveRecord model.
 
 ## Installation
 
@@ -20,9 +18,24 @@ Or install it yourself as:
 
     $ gem install open_api_component_meister
 
-## Usage
+## Basic Usage
 
-TODO: Write usage instructions here
+Run command with specifying target model, and then you can get the result in standard output.
+
+```shell
+$ bundle exec oasc-meister app/models/user.rb
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        age:
+          type: integer
+```
 
 ## Development
 

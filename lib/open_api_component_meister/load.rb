@@ -7,7 +7,7 @@ module OpenApiComponentMeister
     end
 
     def load_schema!
-      @schema_hash = ar.class.column_hash
+      @schema_hash = @ar_model.class.columns_hash
     end
 
     attr_reader :ar_model, :schema_hash

@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
 end
 
 RSpec.describe OpenApiComponentMeister do
+  after { User.destroy_all }
+
   describe OpenApiComponentMeister::Load do
     let!(:user) { User.create(name: "Test Taro", age: 20) }
-    after { User.destroy_all }
-
     let(:target) { described_class.new(user) }
 
     describe "load_schema!" do
@@ -35,6 +35,36 @@ RSpec.describe OpenApiComponentMeister do
         it "valid name" do
           expect(target.model_name).to eq "User"
         end
+      end
+    end
+  end
+
+  describe OpenApiComponentMeister::Transform do
+    let(:schema_hash) do
+      user = User.create(name: "Test Taro", age: 20)
+      OpenApiComponentMeister::Load.new(user).load_schema!
+    end
+
+    let(:target) { described_class.new(model_name: "User", schema_hash: schema_hash) }
+
+    subject { target }
+
+    context do
+
+      let(:expected) do
+        { "User" => {
+            :properties => [
+              { "id" => { :type => :integer } },
+              { "name" => { :type => :string } },
+              { "age" => { :type => :integer } }
+            ],
+            :type => "object"
+          }
+        }
+      end
+
+      it do
+        expect(target.data).to eq expected
       end
     end
   end

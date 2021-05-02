@@ -1,9 +1,15 @@
-RSpec.describe OpenApiComponentMeister do
-  it "has a version number" do
-    expect(OpenApiComponentMeister::VERSION).not_to be nil
-  end
+require "spec_helper"
 
-  it "does something useful" do
-    expect(false).to eq(true)
+class User < ActiveRecord::Base
+end
+
+RSpec.describe OpenApiComponentMeister do
+  let!(:user) { User.create(name: "Test Taro", age: 20) }
+  after { User.destroy_all }
+
+  context do
+    it do
+      expect(true).to eq true
+    end
   end
 end

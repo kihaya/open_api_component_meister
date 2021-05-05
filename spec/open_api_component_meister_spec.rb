@@ -40,14 +40,12 @@ RSpec.describe OpenApiComponentMeister do
   end
 
   describe OpenApiComponentMeister::Transform do
-    let(:schema_hash) do
-      user = User.create(name: "Test Taro", age: 20)
-      OpenApiComponentMeister::Load.new(user).load_schema!
-    end
+    let(:user) { User.create(name: "Test Taro", age: 20) }
+    let(:load) { OpenApiComponentMeister::Load.new(user) }
 
-    let(:target) { described_class.new(model_name: "User", schema_hash: schema_hash) }
+    before { load.load_schema! }
 
-    subject { target }
+    let!(:target) { described_class.new(load: load) }
 
     context do
 

@@ -119,8 +119,23 @@ RSpec.describe OpenApiComponentMeister do
 
       let!(:transform) { OpenApiComponentMeister::Transform.new(load: load) }
 
+      let(:expected) do
+        <<~EOS
+            ---
+            User:
+              type: object
+              properties:
+              - id:
+                  type: integer
+              - name:
+                  type: string
+              - age:
+                  type: integer
+        EOS
+      end
+
       it do
-        OpenApiComponentMeister::Output.new(transform: transform).run!
+        expect { OpenApiComponentMeister::Output.new(transform: transform).run! }.to output(expected).to_stdout
       end
     end
   end

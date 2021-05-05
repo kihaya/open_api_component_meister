@@ -16,15 +16,15 @@ module OpenApiComponentMeister
         type = TypeMapper.new(type: schema_hash[key].type).oas_type
         {
           name => {
-            type: type
+            "type" => type.to_s
           }
         }
       end
 
       {
         model_name => {
-          type: "object",
-          properties: properties
+          "type" => "object",
+          "properties" => properties
         }
       }
     end

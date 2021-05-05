@@ -51,12 +51,12 @@ RSpec.describe OpenApiComponentMeister do
 
       let(:expected) do
         { "User" => {
-            :properties => [
-              { "id" => { :type => :integer } },
-              { "name" => { :type => :string } },
-              { "age" => { :type => :integer } }
+            "properties" => [
+              { "id" => { "type" => "integer" } },
+              { "name" => { "type" => "string" } },
+              { "age" => { "type" => "integer" } }
             ],
-            :type => "object"
+            "type" => "object"
           }
         }
       end

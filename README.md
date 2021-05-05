@@ -2,6 +2,13 @@
 
 Generate and check Open API Component from your ActiveRecord model.
 
+Enable you to realize,
+
++ Smooth development process of database modeling and API development.
++ Benefits of reusable data component.
++ Reduce developer pain of writing YAML of Open API Component.
++ Data consistency between DB and API response.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -37,6 +44,10 @@ components:
         age:
           type: integer
 ```
+
+### Chek your DB schema and component description
+
+Coming soon.
 
 ## Development
 

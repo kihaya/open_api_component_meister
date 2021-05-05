@@ -51,12 +51,12 @@ RSpec.describe OpenApiComponentMeister do
 
       let(:expected) do
         { "User" => {
-            :properties => [
-              { "id" => { :type => :integer } },
-              { "name" => { :type => :string } },
-              { "age" => { :type => :integer } }
+            "properties" => [
+              { "id" => { "type" => "integer" } },
+              { "name" => { "type" => "string" } },
+              { "age" => { "type" => "integer" } }
             ],
-            :type => "object"
+            "type" => "object"
           }
         }
       end
@@ -106,6 +106,36 @@ RSpec.describe OpenApiComponentMeister do
         expect do
           subject
         end.to raise_error(OpenApiComponentMeister::NotSupportedTypeError)
+      end
+    end
+  end
+
+  describe OpenApiComponentMeister::Output do
+    context do
+      let(:user) { User.create(name: "Test Taro", age: 20) }
+      let(:load) { OpenApiComponentMeister::Load.new(user) }
+
+      before { load.load_schema! }
+
+      let!(:transform) { OpenApiComponentMeister::Transform.new(load: load) }
+
+      let(:expected) do
+        <<~EOS
+            ---
+            User:
+              type: object
+              properties:
+              - id:
+                  type: integer
+              - name:
+                  type: string
+              - age:
+                  type: integer
+        EOS
+      end
+
+      it do
+        expect { OpenApiComponentMeister::Output.new(transform: transform).run! }.to output(expected).to_stdout
       end
     end
   end

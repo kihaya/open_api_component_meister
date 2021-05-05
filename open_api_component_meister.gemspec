@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "activerecord", "> 5.2"
   spec.add_dependency "activesupport", "> 5.2"
+  spec.add_dependency "thor", "~> 1.1.0"
 
   spec.add_development_dependency "sqlite3", "~> 1.0"
 end

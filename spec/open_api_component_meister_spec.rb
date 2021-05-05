@@ -139,4 +139,30 @@ RSpec.describe OpenApiComponentMeister do
       end
     end
   end
+
+  describe OpenApiComponentMeister::Main do
+    let(:argv) {  ["User"]}
+    subject { described_class.new(argv).run! }
+
+    context do
+      let(:expected) do
+        <<~EOS
+            ---
+            User:
+              type: object
+              properties:
+              - id:
+                  type: integer
+              - name:
+                  type: string
+              - age:
+                  type: integer
+        EOS
+      end
+
+      it do
+        expect { subject }.to output(expected).to_stdout
+      end
+    end
+  end
 end

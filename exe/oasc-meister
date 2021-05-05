@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "open_api_component_meister"
+
+OpenApiComponentMeister::Main.new(ARGV).run!

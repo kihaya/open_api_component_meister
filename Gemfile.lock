@@ -3,6 +3,7 @@ PATH
   specs:
     open_api_component_meister (0.1.0)
       activerecord (> 5.2)
+      activesupport (> 5.2)
 
 GEM
   remote: https://rubygems.org/

@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "activerecord", "> 5.2"
+  spec.add_dependency "activesupport", "> 5.2"
 
   spec.add_development_dependency "sqlite3", "~> 1.0"
 end

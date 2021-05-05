@@ -12,7 +12,7 @@ module OpenApiComponentMeister
     def build!(model_name, schema_hash)
       properties = schema_hash.keys.map do |key|
         name = schema_hash[key].name
-        type = schema_hash[key].type
+        type = TypeMapper.new(type: schema_hash[key].type).oas_type
         {
           name => {
             type: type

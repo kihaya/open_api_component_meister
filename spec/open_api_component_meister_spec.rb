@@ -68,4 +68,47 @@ RSpec.describe OpenApiComponentMeister do
       end
     end
   end
+
+  describe OpenApiComponentMeister::TypeMapper do
+    subject { described_class.new(type: t).oas_type }
+
+    context "integer" do
+      let!(:t) { :integer }
+      it { is_expected.to eq :integer }
+    end
+
+    context "float" do
+      let!(:t) { :float }
+      it { is_expected.to eq :number }
+    end
+
+    context "string" do
+      let!(:t) { :string }
+      it { is_expected.to eq :string }
+    end
+
+    context "text" do
+      let!(:t) { :text }
+      it { is_expected.to eq :string }
+    end
+
+    context "primary_key" do
+      let!(:t) { :primary_key }
+      it { is_expected.to eq :integer }
+    end
+
+    context "boolean" do
+      let!(:t) { :boolean }
+      it { is_expected.to eq :boolean }
+    end
+
+    context "no support" do
+      let!(:t) { :hoge }
+      it do
+        expect do
+          subject
+        end.to raise_error(OpenApiComponentMeister::NotSupportedTypeError)
+      end
+    end
+  end
 end

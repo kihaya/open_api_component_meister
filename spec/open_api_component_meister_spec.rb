@@ -109,4 +109,19 @@ RSpec.describe OpenApiComponentMeister do
       end
     end
   end
+
+  describe OpenApiComponentMeister::Output do
+    context do
+      let(:user) { User.create(name: "Test Taro", age: 20) }
+      let(:load) { OpenApiComponentMeister::Load.new(user) }
+
+      before { load.load_schema! }
+
+      let!(:transform) { OpenApiComponentMeister::Transform.new(load: load) }
+
+      it do
+        OpenApiComponentMeister::Output.new(transform: transform).run!
+      end
+    end
+  end
 end
